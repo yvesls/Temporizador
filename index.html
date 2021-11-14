@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Cronômetro JS</title>
+  </head>
+  <body class="bg-dark">
+    <div class="container-fluid">
+        <h1 class="d-flex justify-content-center text-light pt-5 mb-5">Cronômetro</h1>
+        
+        <div class="d-flex justify-content-center dropdown">
+            <a class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Escolha um tempo
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li onclick="tempo(temp = 1800)" class="dropdown-item">30 min</li>
+                <li onclick="tempo(temp = 900)" class="dropdown-item">15 min</li>
+                <li onclick="tempo(temp = 300)" class="dropdown-item">5 min</li>
+                <li onclick="tempo(temp = 60)" class="dropdown-item">1 min</li>
+            </ul>
+        </div>
+
+        <div class="py-5 d-flex display-5 justify-content-center" id="insereTempo"></div>
+
+        <div class="d-flex justify-content-center mt-5">
+            <button onclick="startC(clicks++)"  type="button" class="px-4 me-5 buttonStart rounded-pill rounded-danger">Start</button>
+            <button onclick="stopC()" type="button" class="px-4 me-5 buttonStop rounded-pill">Stop</button>
+            <button onclick="resetC()" type="button" class="px-4 buttonLoad rounded-pill">Reset</button>
+        </div>
+        
+
+    </div>
+    <audio id="alarm" controls>
+      <source src="sons/alarm.mp3" type="audio/mp3">
+    </audio>
+    <audio id="click" controls>
+      <source src="sons/click.mp3" type="audio/mp3">
+    </audio>
+
+    
+    <style>
+      body {
+        overflow: hidden;
+      }
+      button {
+        box-shadow: 0 6px 0 whitesmoke;
+        position: relative;
+        padding: 5px;
+        border: 1px solid black;
+      }
+      .buttonLoad {
+        background-color: rgb(235, 231, 20);
+      }
+      .buttonLoad:hover {
+        background-color: rgb(255, 251, 29);
+      }
+      .buttonStop {
+        background-color: brown;
+      }
+      .buttonStop:hover {
+        background-color: rgb(196, 52, 52);
+      }
+      .buttonStart{
+        background-color: rgb(5, 146, 12);
+      }
+      .buttonStart:hover {
+        background-color: rgb(6, 180, 15);
+      }
+      button:active {
+        top: 5px;
+        box-shadow: 0 1px 0 whitesmoke;
+      }
+      .dropdown-item.dropdown-item.dropdown-item.dropdown-item:hover {
+        background-color: #22bb33;
+        color: aliceblue;
+        width: 120%;
+        margin-left: -10%;
+      }
+      audio {
+        position: absolute;
+        bottom: 0;
+        right: -1000px;
+      }
+    </style>
+    <!-- Meu JS -->
+    <script src="app.js"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
