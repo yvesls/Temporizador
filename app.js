@@ -1,5 +1,6 @@
-var cronometro 
-
+var cronometro;
+document.getElementById('insereTempo').innerHTML = '00 : 00';
+var disable = 0;
 
 function tempo(temp){ //passa como parâmetro o tempo escolhido no dropdown
     
@@ -7,9 +8,9 @@ function tempo(temp){ //passa como parâmetro o tempo escolhido no dropdown
       cronometro = temp
       document.getElementById('insereTempo').innerHTML = '01 : 00'
       
-
+      disable = 1;
    } 
-   else{
+   else if(temp > 61){
        cronometro = temp 
         
        document.getElementById('insereTempo').innerHTML = (cronometro / 60) + ' : 00'  // converte o tempo de segundos para min e exibe 
@@ -18,8 +19,11 @@ function tempo(temp){ //passa como parâmetro o tempo escolhido no dropdown
        }else if(cronometro == 300){
         document.getElementById('insereTempo').innerHTML = '0' + (cronometro / 60) + ' : 00' //se escolher tempos menores que 10 min, exibir desta maneira
        }
-    
+        disable = 1;
    }
+
+   
+
    return cronometro //retorna o valor do tempo
 }
 
@@ -32,12 +36,15 @@ cronometro = tempo() //atualiza o valor do tempo
 let start, clicks = 0 // cria variáveis para acessar com mais facilidade o controlador de tempo e, contar a quantidade de vezes que chamamos a função 
 
 function startC(clicks){ //função start cronometro
-    document.getElementById('click').play();
-    teste = 1;
-    if(clicks == 0){ //só executa uma vez
-        start = setInterval( funcC, 1000 )
+    if(disable == 1){
+        document.getElementById('click').play();
+        teste = 1;
+        if(clicks == 0){ //só executa uma vez
+            start = setInterval( funcC, 1000 )
+        }
+        document.getElementById('dropdownMenuButton1').className = 'btn btn-success dropdown-toggle disabled';
     }
-    document.getElementById('dropdownMenuButton1').className = 'btn btn-success dropdown-toggle disabled';
+    
     
 }
 
@@ -91,10 +98,10 @@ function funcC (){ // função geral de exibição e controle na saída do tempo
             segundos = 60; //reseta o valor de segundos
         }
         
-    }else{// zera o cronometro
+    }else if(cronometro == 0){// zera o cronometro
         setInterval( function espera(){
             location.reload('insereTempo');
-        }, 4000 );
+        }, 1000 );
         document.getElementById('alarm').play();
     }
 
@@ -106,7 +113,7 @@ function resetC(){ // zera o cronometro
 
     setInterval( function espera(){
         location.reload(cronometro); 
-    }, 2000 );
+    }, 500 );
     document.getElementById('click').play();
 }
 
@@ -117,5 +124,6 @@ function stopC(){ // para o cronometro por meio da variável passada
         console.log(teste);
         clicks = 0;
     }
+    disable = 1;
     teste++;
 }
